@@ -6,6 +6,7 @@ const BOT_TOKEN = '8785347014:AAG2PPnhP9DHw6Cg8zIZHJdYi6gu6g_yjWY';
 const CHAT_ID = '-1003753568907';
 
 app.post('/km-webhook', async (req, res) => {
+  console.log('Body nhận được:', JSON.stringify(req.body));
   try {
     const region = req.body.Region || 'Không rõ';
     const username = req.body.Username || 'Không rõ';
