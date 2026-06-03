@@ -36,6 +36,12 @@ app.post('/km-webhook', async (req, res) => {
   }
 });
 
+app.get('/km-webhook', (req, res) => {
+  const challenge = req.query.challenge;
+  if (challenge) return res.send(challenge);
+  res.send('OK');
+});
+
 app.get('/', (req, res) => res.send('KM Webhook Server is running'));
 
 const PORT = process.env.PORT || 3000;
