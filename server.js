@@ -38,9 +38,11 @@ app.post('/km-webhook', async (req, res) => {
 });
 
 app.get('/km-webhook', (req, res) => {
-  const challenge = req.query.challenge;
-  if (challenge) return res.send(challenge);
-  res.send('OK');
+  if (req.query.token !== 'km123') {
+    res.writeHead(401);
+    return res.end();
+  }
+  return res.end(req.query.challenge);
 });
 
 app.get('/', (req, res) => res.send('KM Webhook Server is running'));
