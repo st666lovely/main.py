@@ -14,7 +14,7 @@ app.post('/km-webhook', async (req, res) => {
     const phone = attrs.default_phone_number || 'Không rõ';
     const imageUrl = attrs.image_attachment || null;
 
-    const caption = `🎁 *Đăng ký nhận KM*\n\n🎮 Sảnh: ${region}\n👤 ID: ${username}\n🔢 Số chuỗi: ${phone}`;
+    const caption = `🎁 *Đăng ký nhận KM chuỗi thắng liên tiếp*\n\n🎮 Sảnh: ${region}\n👤 ID: ${username}\n🔢 Số chuỗi: ${phone}`;
 
     if (imageUrl) {
       // Gửi ảnh kèm caption
@@ -45,7 +45,7 @@ app.post('/km-webhook', async (req, res) => {
       responses: [
         {
           type: 'text',
-          message: 'Đã gửi đăng ký KM thành công! 🎁'
+          message: 'Đã gửi đăng ký KM thành công ạ. Mình chú ý biến động số dư ví sau giây lát khi tiền thưởng đã được cập nhật giúp em nha, em cảm ơn ạ 🎁'
         }
       ]
     });
