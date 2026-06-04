@@ -12,24 +12,40 @@ app.post('/km-webhook', async (req, res) => {
     const region = attrs.default_region || 'Không rõ';
     const username = attrs.default_username || 'Không rõ';
     const phone = attrs.default_phone_number || 'Không rõ';
+    const imageUrl = attrs.image_attachment || null;
 
-    const text = `🎁 *Đăng ký nhận KM thắng liên tiếp*\n\n🎮 Sảnh: ${region}\n👤 ID: ${username}\n🔢 Số chuỗi: ${phone}`;
+    const caption = `🎁 *Đăng ký nhận KM*\n\n🎮 Sảnh: ${region}\n👤 ID: ${username}\n🔢 Số chuỗi: ${phone}`;
 
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text,
-        parse_mode: 'Markdown'
-      })
-    });
+    if (imageUrl) {
+      // Gửi ảnh kèm caption
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          photo: imageUrl,
+          caption,
+          parse_mode: 'Markdown'
+        })
+      });
+    } else {
+      // Không có ảnh thì gửi text
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: caption,
+          parse_mode: 'Markdown'
+        })
+      });
+    }
 
     res.json({
       responses: [
         {
           type: 'text',
-          message: 'Đã gửi đăng ký KM thành công. Trong quá trình chờ xét duyệt mình chú ý số dư có biến động khi tiền thưởng được cập nhật vào ạ'
+          message: 'Đã gửi đăng ký KM thành công! 🎁'
         }
       ]
     });
