@@ -13,7 +13,7 @@ app.post('/km-webhook', async (req, res) => {
     const username = attrs.default_username || 'Không rõ';
     const phone = attrs.default_phone_number || 'Không rõ';
 
-    const text = `🎁 *Đăng ký nhận KM*\n\n🎮 Sảnh: ${region}\n👤 ID: ${username}\n🔢 Số chuỗi: ${phone}`;
+    const text = `🎁 *Đăng ký nhận KM thắng liên tiếp*\n\n🎮 Sảnh: ${region}\n👤 ID: ${username}\n🔢 Số chuỗi: ${phone}`;
 
     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
@@ -29,7 +29,7 @@ app.post('/km-webhook', async (req, res) => {
       responses: [
         {
           type: 'text',
-          message: 'Đã gửi đăng ký KM thành công! 🎁'
+          message: 'Đã gửi đăng ký KM thành công. Trong quá trình chờ xét duyệt mình chú ý số dư có biến động khi tiền thưởng được cập nhật vào ạ'
         }
       ]
     });
