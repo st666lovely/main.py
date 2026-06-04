@@ -6,16 +6,12 @@ const BOT_TOKEN = '8785347014:AAG2PPnhP9DHw6Cg8zIZHJdYi6gu6g_yjWY';
 const CHAT_ID = '-1003753568907';
 
 app.post('/km-webhook', async (req, res) => {
-  console.log('Full body:', JSON.stringify(req.body));
-
   try {
-    // ChatBot gửi attributes trong req.body.attributes
     const attrs = req.body.attributes || {};
-    const userAttrs = req.body.userAttributes || {};
 
-    const region = attrs.Region || attrs.region || 'Không rõ';
-    const username = userAttrs.default_name || attrs.Username || attrs.username || 'Không rõ';
-    const phone = attrs['Phone number'] || attrs.phone_number || attrs['phone number'] || 'Không rõ';
+    const region = attrs.default_region || 'Không rõ';
+    const username = attrs.default_username || 'Không rõ';
+    const phone = attrs.default_phone_number || 'Không rõ';
 
     const text = `🎁 *Đăng ký nhận KM*\n\n🎮 Sảnh: ${region}\n👤 ID: ${username}\n🔢 Số chuỗi: ${phone}`;
 
@@ -29,7 +25,6 @@ app.post('/km-webhook', async (req, res) => {
       })
     });
 
-    // Trả về đúng format ChatBot expect
     res.json({
       responses: [
         {
